@@ -3,7 +3,8 @@ import Education from './Education'
 import Experience from './Experience'
 import Skills from './Skills'
 import Border from './border'
-
+import Counter from './otherassignments/counter'
+import Clock from './otherassignments/clock'
 import Events from './otherassignments/events'
 
 const Resume = () => {
@@ -21,12 +22,18 @@ const Resume = () => {
         <div className='flex justify-center p-4 print:hidden'>
           <input type="button" value="Print" onClick={()=>{window.print()}} className='bg-blue-400 text-2xl p-4 text-black hover:text-white hover:bg-blue-700 rounded-full'  />
         </div>
+        <Border>
+          <Clock/>
+        </Border>
+        <Border>
+          <Events/>
+        </Border>
 
         <Border>
-        <Events/>
+          <Counter/>
         </Border>
         
-        
+
     </div>
   )
 }
