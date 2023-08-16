@@ -7,16 +7,16 @@ import Counter from './otherassignments/counter'
 import Clock from './otherassignments/clock'
 import Events from './otherassignments/events'
 
-const Resume = () => {
+const Resume = ({skillData, eduData, expData}) => {
   return (
     <div className='flex justify-center flex-col'>
         <div className=' w-full h-full bg-slate-700 rounded-xl text-slate-300 font-medium p-8 '>
             <div className='pl-10 text-6xl'>
                 <h1>Sagar C K</h1>
             </div>    
-            <Education list="list-decimal"/>
-            <Experience/>
-            <Skills/>
+            <Education list="list-decimal" eduData={eduData}/>
+            <Experience expData = {expData}/>
+            <Skills skillData = {skillData}/>
  
         </div>
         <div className='flex justify-center p-4 print:hidden'>
