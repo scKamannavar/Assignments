@@ -6,6 +6,8 @@ import Border from './border'
 import Counter from './otherassignments/counter'
 import Clock from './otherassignments/clock'
 import Events from './otherassignments/events'
+import Dropdown from './otherassignments/dropdown'
+import SearchList from './otherassignments/searchList'
 
 const Resume = ({skillData, eduData, expData}) => {
   return (
@@ -32,8 +34,10 @@ const Resume = ({skillData, eduData, expData}) => {
         <Border>
           <Counter/>
         </Border>
-        
-
+        <Border>
+          <Dropdown/>
+        </Border>
+        <SearchList/>
     </div>
   )
 }
