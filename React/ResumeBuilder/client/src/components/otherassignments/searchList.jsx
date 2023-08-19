@@ -18,8 +18,7 @@ const searchList = () => {
                 // if(li.includes({searchele}))
                     // {
                         return <li key={index}>{li}</li>
-                    // }
-                    
+                    // }                    
             })}
             
         </ul>

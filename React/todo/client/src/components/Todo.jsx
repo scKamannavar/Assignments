@@ -1,52 +1,21 @@
-import React, { useState } from 'react'
-const tasks = [
-    {
-        id : 1,
-        task : 'lorem 20 30',
-        status : false
-    },
-    {
-        id : 2,
-        task : 'lorem 20 30',
-        status : false
-    },
-    {
-        id : 3,
-        task : 'lorem 20 30',
-        status : false
-    },
-    {
-        id : 4,
-        task : 'lorem 20 30',
-        status : false
-    }
-]
+import React, { useEffect, useState } from 'react'
+import tasks from './data/tasks'
+import Form from './form'
+import Search from './search'
 
 const Todo = () => {
     const [task, setTask] = useState(tasks)
-    const [status, setStatus] = useState(false)
-   
-
-    // if(status){
-    //     setTask(task.map((t)=>{
-    //         // console.log('before updating',t)
-    //         if(id === t.id)
-    //         {   
-    //             return {...t, status:status}
-               
-    //         }
-    //         return t
-          
-    //     }))
-    // }
+    const [formvisi, setFormvisi] = useState(false)    
+    const [completedtask, setCompletedtask] = useState(0)
+    const [searchelement, setSearchelement] = useState('')
+    const [filterelement, setFilterelement] = useState('all')
 
     function handleClick(id){
-        // setStatus(true)
         console.log('inside handle', id)
         setTask(task.map((t)=>{
-            if(id === t.id) {return {...t, status:true} }
+            if(id === t.id) {return {...t, status:!t.status} }
             return t
-        }) )    
+        }) )   
     }
 
     function handleDelete(id){
@@ -54,30 +23,93 @@ const Todo = () => {
         setTask( task.filter((t)=>t.id !== id)
         )
     }
+
+    function addTask(newTask){
+        const updatedTasks = {...task,newTask}
+        setTask([...task,newTask])
+    }
+
+    useEffect(() => {
+        setCompletedtask(task.filter((ct)=> ct.status === true).length)   
+      }
+      );
+
+   
+      
+
+        function handleFilter(arg){
+            setFilterelement(arg)
+            console.log(filterelement)
+        }
+        var commonElements
+        var searchedList
+        var filteredList
+
+        searchedList = task.filter(t => {
+            return t.task.toLowerCase().includes(searchelement.toLowerCase());
+          })//Calling setter here to update
+        //   console.log('searched List', searchedList)
+
+        if(filterelement == 'all'){
+            commonElements = searchedList
+            console.log('co', commonElements)
+        }
+        else{  
+             filteredList = task.filter(t => {
+                return t.status == filterelement
+              })
+            //   console.log('filtered list', filteredList)
+
+              commonElements = filteredList.filter(item1 =>
+                searchedList.some(item2 => item2.id === item1.id) //Different one
+                // searchedList.includes(item1)
+              );
+              console.log('Final filtered list', commonElements)
+        }
+
+
   return (
-    <div className='flex justify-center'>
-       <div className='flex justify-start  p-4 flex-col bg-slate-900 h-screen w-full sm:w-[50%]'>
-            <div className='flex text-slate-300 font-Montserrat justify-center mt-10 '>
-                    <div className='flex bg-white w-full rounded-xl h-10 text-slate-950'>
-                        <input className='p-2 flex-1 rounded-full h-full text-slate-950 outline-none' type="text" name="addTodo" id="" />
-                        <button className='bg-blue-600 h-full px-4 rounded-xl text-white' type="submit">Add</button>
-                    </div>       
+    <div className='flex justify-center relative'>
+       <div className='flex justify-start relative p-2 pb-20 flex-col h-full w-full min-h-screen  bg-slate-50 '>
+            {/* <Search completed ={completedtask} taskData={task} setTaskData ={setTask}/> */}
+            <div className='flex flex-col justify-between  border-2x h-fit shadow-xl bg-gray-300 left-0 right-0 top-0 pt-0 px-2   w-full fixed '>
+                <div className='flex font-Outfit font-bold text-2xl justify-center py-2'>
+                    <h3>To-Do List </h3>
+                </div>
+                <div className='flex justify-center px-4'>
+                    <input className='h-[45px] px-4 py-2 w-full rounded-full' type="text" placeholder='Search' name="" id="" onChange={(e)=>setSearchelement(e.target.value)} />
+                </div>
+                <div className='flex justify-around px-2 '>
+                        <div className={`${filterelement == 'all'? 'border-b-2 border-black':'' } text-md font-Montserrat`}><button className='py-2' onClick={()=>handleFilter('all')} >All <span className='p-1 bg-blue-400 rounded-full text-white'>{task.length}</span></button></div>
+                        <div className={`${filterelement == true? 'border-b-2 border-black':'' } text-md font-Montserrat`}><button className='py-2' onClick={()=>handleFilter(true)} >Completed <span className='p-1 bg-green-400 rounded-full text-white'>{completedtask}</span></button></div>
+                        <div className={`${filterelement == false? 'border-b-2 border-black':'' } text-md font-Montserrat`}><button className='py-2' onClick={()=>handleFilter(false)} >Not Completed <span className='p-1 bg-red-400 rounded-full text-white'>{task.length-completedtask}</span></button></div>
+                </div>
+            </div>
+            <div className='pt-[130px] sm:grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 sm:gap-4 h-full'>
+                {commonElements.slice(0).reverse().map((t)=>  //{searchedList.slice(0).reverse().map((t)=>  
+                    <div className={` ${t.status ? 'bg-slate-300 text-slate-400 shadow-none sm:justify-center ':'bg-slate-600  shadow-xl shadow-zinc-600 '} flex mt-8 p-4 text-slate-100 rounded-md list-none `}>
+                        <div className='flex-1'>
+                            <li>{t.task} </li>
+                        </div>
+                        <div className='sm:flex sm:flex-col sm:gap-2'>
+                            <button className={` ${ t.status ?'bg-blue-500':'bg-green-400'} sm:hover:bg-green-500 p-2 mr-2 sm:mr-0 sm:bg-none rounded-md `} onClick={()=>handleClick(t.id)}>{`${t.status?'↩️':'✅'}`} </button>
+                            <button className='bg-red-400 p-2 rounded-md hover:bg-red-500' onClick={()=>handleDelete(t.id)}> 🗑️</button>
+                        </div>
+                    </div>
+                )}
             </div>
 
-            {task.map((t)=>{
-                return <div className={` ${t.status ? 'bg-slate-100':'bg-slate-400'} flex mt-10 p-4 text-slate-100 rounded-md list-none`}>
-                <div className='flex-1'>
-                    <li>Lorem ipsum dolor sit amet </li>
-                </div>
-                <div >{t.id}
-                    <button className='bg-green-400 p-2 rounded-md hover:bg-green-500' onClick={()=>handleClick(t.id)}> done</button>
-                    <button className='bg-red-400 p-2 rounded-md hover:bg-red-500' onClick={()=>handleDelete(t.id)}> delete</button>
-                </div>
+            
+            <div className='flex justify-center align-middle mr-6 mb-6 fixed w-16 h-16 rounded-full bg-blue-700 shadow-sm shadow-white text-white bottom-0 right-0 '>
+               <button onClick={()=>setFormvisi(!formvisi)}>
+                <span className='fill-white '>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="25px" viewBox="0 0 448 512"><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                </span>
+               </button>
             </div>
-            })}
-            
+            <Form formState={formvisi} addTask={addTask}/>
            
-            
+           
       </div>
     </div>
   )
