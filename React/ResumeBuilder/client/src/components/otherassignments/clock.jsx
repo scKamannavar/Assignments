@@ -13,7 +13,7 @@ const clock = () => {
     
                     setTime(new Date())
                 },1000)
-                console.log(tard)
+                // console.log(tard)
             },[])
 
    
@@ -21,7 +21,7 @@ const clock = () => {
 
     // console.log(updateTime())
   return (
-    <div className='flex flex-col '>
+    <div className='flex flex-col print:hidden'>
         <div className='flex flex-1 justify-center text-5xl'>
             {(Math.floor((time-startdate)/(1000*60*60)))%60} : {(Math.floor((time-startdate)/(1000*60)))%60} : {(Math.floor((time-startdate)/1000))%60}
         </div>

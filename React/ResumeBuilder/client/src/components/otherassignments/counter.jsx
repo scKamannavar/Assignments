@@ -8,12 +8,12 @@ const counter = () => {
             setCount(2)
             setCount(1+count)
         // setCount(count +1)
-        console.log('in',count)
+        // console.log('in',count)
        
     }
     console.log('out', count)
   return (
-    <div className='flex flex-row p-10 justify-center'>
+    <div className='flex flex-row p-10 justify-center print:hidden'>
       <div className='flex-1 text-2xl'>
         {count}
       </div>

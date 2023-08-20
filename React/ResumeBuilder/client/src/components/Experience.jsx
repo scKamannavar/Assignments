@@ -15,7 +15,8 @@ const Experience = ({expData}) => {
             
           <h1 className='' >{edu.year}</h1>
            
-            <h1 className=''>{edu.role}</h1>
+          <h1 className=''>{edu.role}</h1>
+          <h1 className=''>{edu.description}</h1>
         </div>
         )}
       

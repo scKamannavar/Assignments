@@ -7,26 +7,46 @@ import Experience from './components/Experience'
 
 
 function App() {
-  
+//  console.log('Hobbies', ResumeData)
   const [skills, setSkills] = useState(ResumeData.skills)
   const [education, setEducation] = useState(ResumeData.education)
   const [experience, setExperience] = useState(ResumeData.experience)
+  const [about, setAbout] = useState(ResumeData.about)
+  const [hobbies, setHobbies] = useState(ResumeData.hobbies)
 
-  function updateSkill(additionalData){
+  function addSkill(additionalData){
       setSkills([...skills, additionalData])
     }
 
-    function updateEdu(additionalData){
+    function addEdu(additionalData){
       setEducation([...education, additionalData])
     }
 
-    function updateExp(additionalData){
+    function addExp(additionalData){
       setExperience([...experience, additionalData])
+    }
+
+    function addAbt(additionalData){
+      setAbout(additionalData)
+    }
+
+    function addHobbies(additionalData){
+      console.log('New hobby in app component', additionalData)
+      setHobbies([...hobbies, additionalData])
+    }
+
+    function deleteSkill(skillId){
+      setSkills(skills.filter((skill)=> skill !== skillId))
     }
   return (
     <>
-      <Form addSkill = {updateSkill} addEdu = {updateEdu} addExp = {updateExp}/>
-      <Resume skillData={skills} eduData={education} expData = {experience}/>
+      <Form addSkill = {addSkill} addEdu = {addEdu} addExp = {addExp} addAbt = {addAbt} addHobbies={addHobbies}/>
+      <div className='flex justify-center p-4 print:hidden'>
+          <input type="button" value="Print" onClick={()=>{window.print()}} className='bg-none border-2 border-blue-700 text-2xl px-4 py-2 text-black hover:text-white hover:bg-blue-700 rounded-xl'  />
+      </div>
+      <div className="hidden print:block">
+        <Resume skillData={skills} eduData={education} expData = {experience} abtData={about} hobbiesData={hobbies} deleteSkill={deleteSkill}></Resume>
+      </div>
       
     </>
   )

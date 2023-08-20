@@ -38,7 +38,7 @@ function handleMouseOut(){
  }
  
   return (
-    <div className='flex justify-around' onClick={()=>console.log('ooo')}>
+    <div className='flex justify-around print:hidden' onClick={()=>console.log('ooo')}>
       <img ref={imageEle}  src="https://www.shareicon.net/data/2016/01/05/232816_naruto_256x256.png" alt="test Image"
       onMouseOver={handleMouse} onMouseOut={handleMouseOut}
       />
