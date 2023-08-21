@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
+import Education from './Education'
+import Experience from './Experience'
+import Skills from './Skills'
+import Hobbies from './hobbies'
+import About from './About'
 
-const form = ({addSkill, addEdu, addExp, addAbt, addHobbies}) => {
+const form = ({addSkill, addEdu, addExp, addAbt, addHobbies, skillData, eduData, expData, abtData, hobbiesData}) => {
     const [skill, setSkill] = useState('');
     const [education, setEducation] = useState('');
     const [experience, setExperience] = useState({});
@@ -44,14 +49,16 @@ const form = ({addSkill, addEdu, addExp, addAbt, addHobbies}) => {
 
   return (
     <div className='flex justify-center print:hidden'>
-      <form className='flex flex-col align-middle bg-slate-400 rounded-md p-4 w-[50%]' action="">
-        <div className='flex flex-col justify-center'>
+      <form className='flex flex-col items-center  bg-slate-100 rounded-md p-4 w-full' action="">
+        <div className='flex flex-col  w-[50%]'>
             <h1 className='text-4xl text-slate-900'>Skills</h1>
             <input className='h-12 p-2 border-2 border-blue-500 focus:border-spacing-4 rounded-lg' type="text" name="skills" id="skills" value={skill} onChange={(e)=>setSkill(e.target.value)} />
             <button className='bg-green-400 text-white px-6 py-4 rounded-md hover:bg-green-800 mt-3' type="button" onClick={handleClickSkil}>Add</button>
+            <Skills skillData = {skillData} />
         </div>
+        
 
-        <div className='flex flex-col justify-center'>
+        <div className='flex flex-col w-[50%] '>
             <h1 className='text-4xl text-slate-900'>Experience</h1>
             <h1>Company</h1>
             <input className='h-12 p-2 border-2 border-blue-500 focus:border-spacing-4 rounded-lg' type="text" name="company" id="company" onChange={(e)=>setCompany(e.target.value)} />
@@ -62,13 +69,16 @@ const form = ({addSkill, addEdu, addExp, addAbt, addHobbies}) => {
             <h1>Description</h1>
             <input className='h-12 p-2 border-2 border-blue-500 focus:border-spacing-4 rounded-lg' type='text' name="description" id="description" onChange={(e)=>setDescription(e.target.value)}/>
             <button className='bg-green-400 text-white px-6 py-4 rounded-md hover:bg-green-800 mt-3' type="button" onClick={(e)=>handleClickExperience(e)}>Add</button>
+            <Experience expData = {expData}/>
         </div>
+        
 
         <div className='flex flex-col justify-center'>
             <h1 className='text-4xl text-slate-900'>Education</h1>
             <input className='h-12 p-2 border-2 border-blue-500 focus:border-spacing-4 rounded-lg' type="text" name="education" id="education"onChange={(e)=>setEducation(e.target.value)} />
             <button className='bg-green-400 text-white px-6 py-4 rounded-md hover:bg-green-800 mt-3' type="button" onClick={handleClickEducation}>Add</button>
         </div>
+        <Education list="list-decimal" eduData={eduData}/>
 
         <div className='flex flex-col justify-center'>
             <h1 className='text-4xl text-slate-900'>About</h1>
@@ -80,13 +90,14 @@ const form = ({addSkill, addEdu, addExp, addAbt, addHobbies}) => {
             <input className='h-12 p-2 border-2 border-blue-500 focus:border-spacing-4 rounded-lg' type="text" name="email" id="email"onChange={(e)=>setEmail(e.target.value)} />
             <button className='bg-green-400 text-white px-6 py-4 rounded-md hover:bg-green-800 mt-3' type="button" onClick={handleClickAbout}>Add</button>
         </div>
+        <About abtData = {abtData}/> 
 
         <div className='flex flex-col justify-center'>
             <h1 className='text-4xl text-slate-900'>Hobbies</h1>
             <input className='h-12 p-2 border-2 border-blue-500 focus:border-spacing-4 rounded-lg' type="text" name="Hobbies" id="Hobbies"onChange={(e)=>setHobbies(e.target.value)} />
             <button className='bg-green-400 text-white px-6 py-4 rounded-md hover:bg-green-800 mt-3' type="button" onClick={handleClickHobby}>Add</button>
         </div>
-
+        <Hobbies hobbiesData={hobbiesData}/>
       </form>
     </div>
   )

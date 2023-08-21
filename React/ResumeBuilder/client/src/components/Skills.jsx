@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 
 const Skills = ({skillData, deleteSkill}) => {
-
+  console.log('Aganaga aganaga', skillData)
   function handleDelete(id){
     deleteSkill(id)
     // console.log(id)
