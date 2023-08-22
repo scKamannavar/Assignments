@@ -1,19 +1,19 @@
 import React from 'react'
 
-const design1 = () => {
+const design1 = ({resumeinfo}) => {
   return (
     <div className='flex flex-col justify-start font-serif'>
       <div className='flex-1 border-slate-600 border-b'>
         <h1 className='text-4xl'>Sagar c Kamannavar</h1>
       </div>
       <div className='py-2'>
-        <h1 className='font-semibold'>Gmail : <span className='font-normal'>sagarck08@gmail.com</span></h1>
-        <h1 className='font-semibold'>Contact : <span className='font-sans font-normal'>8150903238</span></h1>
+        <h1 className='font-semibold'>Email : <span className='font-normal'>{resumeinfo.about.email}</span></h1>
+        <h1 className='font-semibold'>Contact : <span className='font-sans font-normal'>{resumeinfo.about.phone}</span></h1>
       </div>
       {/* About/Objective */}
       <div className='py-2'>
         <h1 className='font-semibold text-2xl'>About:</h1>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit tenetur recusandae animi voluptatum? Illum voluptatibus nihil perspiciatis, et omnis alias explicabo repellat aspernatur facere, commodi earum animi ipsa neque voluptatem?</p>
+        <p>{resumeinfo.about.aboutText}</p>
       </div>
       {/* Experience */}
       <div className='py-2'>
