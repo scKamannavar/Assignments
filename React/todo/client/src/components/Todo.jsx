@@ -4,11 +4,22 @@ import Form from './form'
 import Search from './search'
 
 const Todo = () => {
-    const [task, setTask] = useState(tasks)
+    var storedTaskData = localStorage.getItem('taskData');
+    console.log('storedTaskData data',storedTaskData)
+     if (storedTaskData == null) {
+       localStorage.setItem('taskData', JSON.stringify([]));
+     }
+    
+    const [task, setTask] = useState(JSON.parse(storedTaskData))
+    // const [task, setTask] = useState(tasks)
     const [formvisi, setFormvisi] = useState(false)    
     const [completedtask, setCompletedtask] = useState(0)
     const [searchelement, setSearchelement] = useState('')
     const [filterelement, setFilterelement] = useState('all')
+
+    useEffect(() => {
+        localStorage.setItem('taskData', JSON.stringify(task));
+  },[task]);
 
     function handleClick(id){
         console.log('inside handle', id)
