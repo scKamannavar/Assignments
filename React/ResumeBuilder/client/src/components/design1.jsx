@@ -72,7 +72,7 @@ const design1 = ({resumeinfo}) => {
                     <div className='bg-gray-200 rounded-full py-1 px-2 mr-2'>
                         {hobby}
                     </div>
-            )}
+        )}
         </div>
       </div>
     </div>
