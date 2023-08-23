@@ -11,9 +11,10 @@ const About = ({abtData}) => {
           {
             // skillData.map((skill, index)=>
             <div>
-            <li className='list-disc'>{abtData.aboutText} </li>
+            <li className='list-disc'>{abtData.name} </li>
             <li className='list-disc'>{abtData.phone} </li>
             <li className='list-disc'>{abtData.email} </li>
+            <li className='list-disc'>{abtData.aboutText} </li>
             </div>
             // )
           }

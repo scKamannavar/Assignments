@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import ResumeData from '../data/info'
 
-const Hobbies = ({hobbiesData}) => {
+const Hobbies = ({hobbiesData,deleteHobby}) => {
   
+ const handleDelete =(id)=>{
+    deleteHobby(id)
+ } 
 
 //   console.log('inside hobbies component',hobbiesData) //  check
   return ( 
@@ -13,7 +16,7 @@ const Hobbies = ({hobbiesData}) => {
       <div className='flex-1 text-2xl'>
           {
             hobbiesData.map((hobby, index)=>
-            <li key={index} className='list-disc'>{hobby}</li>
+            <li key={index} className='list-disc'>{hobby}<span onClick={()=>handleDelete(index)}>Delete</span></li>
             )
           }
       </div>  
