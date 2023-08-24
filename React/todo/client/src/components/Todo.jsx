@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import tasks from './data/tasks'
 import Form from './form'
 import Search from './search'
+import {motion, AnimatePresence } from 'framer-motion'
 
 const Todo = () => {
     var storedTaskData = localStorage.getItem('taskData');
@@ -83,12 +84,12 @@ const Todo = () => {
     <div className='flex justify-center relative'>
        <div className='flex justify-start relative p-2 pb-20 flex-col h-full w-full min-h-screen  bg-slate-50 '>
             {/* <Search completed ={completedtask} taskData={task} setTaskData ={setTask}/> */}
-            <div className='flex flex-col justify-between  border-2x h-fit shadow-xl bg-gray-300 left-0 right-0 top-0 pt-0 px-2   w-full fixed '>
+            <div className='flex flex-col z-50 justify-between  border-2x h-fit shadow-xl bg-gray-300 left-0 right-0 top-0 pt-0 px-2   w-full fixed '>
                 <div className='flex font-Outfit font-bold text-2xl justify-center py-2'>
-                    <h3>To-Do List </h3>
+                    <h3>PLAN YOUR DAY😊</h3>
                 </div>
                 <div className='flex justify-center px-4'>
-                    <input className='h-[45px] px-4 py-2 w-full rounded-full' type="text" placeholder='Search' name="" id="" onChange={(e)=>setSearchelement(e.target.value)} />
+                    <input className='h-[45px] sm:w-11/12 px-4 py-2 w-full rounded-full' type="text" placeholder='Search' name="" id="" onChange={(e)=>setSearchelement(e.target.value)} />
                 </div>
                 <div className='flex justify-around px-2 '>
                         <div className={`${filterelement == 'all'? 'border-b-2 border-black':'' } text-md font-Montserrat`}><button className='py-2' onClick={()=>handleFilter('all')} >All <span className='p-1 bg-blue-400 rounded-full text-white'>{task.length}</span></button></div>
@@ -96,19 +97,27 @@ const Todo = () => {
                         <div className={`${filterelement == false? 'border-b-2 border-black':'' } text-md font-Montserrat`}><button className='py-2' onClick={()=>handleFilter(false)} >Not Completed <span className='p-1 bg-red-400 rounded-full text-white'>{task.length-completedtask}</span></button></div>
                 </div>
             </div>
-            <div className='pt-[130px] sm:grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 sm:gap-4 h-full'>
-                {commonElements.slice(0).reverse().map((t)=>  //{searchedList.slice(0).reverse().map((t)=>  
-                    <div className={` ${t.status ? 'bg-slate-300 text-slate-400 shadow-none sm:justify-center ':'bg-slate-600  shadow-xl shadow-zinc-600 '} flex mt-8 p-4 text-slate-100 rounded-md list-none `}>
-                        <div className='flex-1'>
-                            <li>{t.task} </li>
-                        </div>
-                        <div className='sm:flex sm:flex-col sm:gap-2'>
-                            <button className={` ${ t.status ?'bg-blue-500':'bg-green-400'} sm:hover:bg-green-500 p-2 mr-2 sm:mr-0 sm:bg-none rounded-md `} onClick={()=>handleClick(t.id)}>{`${t.status?'↩️':'✅'}`} </button>
-                            <button className='bg-red-400 p-2 rounded-md hover:bg-red-500' onClick={()=>handleDelete(t.id)}> 🗑️</button>
-                        </div>
-                    </div>
+            <motion.div layout
+             className='pt-[130px] sm:grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 sm:gap-4 h-full'>
+                {commonElements.slice(0).reverse().map((t)=>  //{searchedList.slice(0).reverse().map((t)=> 
+                    <AnimatePresence>
+                        <motion.div layout
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 10 }}
+                            transition={{ duration: 0.3, ease: 'linear' }}
+                        key={t.id} className={` ${t.status ? 'bg-slate-300 text-slate-400 shadow-none sm:justify-center ':'bg-slate-600  shadow-xl shadow-zinc-600 '} flex mt-8 p-4 text-slate-100 rounded-md list-none `}>
+                           <motion.div layout className='flex-1'>
+                                <li>{t.task} </li>
+                            </motion.div>
+                            <div className='sm:flex sm:flex-col sm:gap-2'>
+                                <button className={` ${ t.status ?'bg-blue-500':'bg-green-400'} sm:hover:bg-green-500 p-2 mr-2 sm:mr-0 sm:bg-none rounded-md `} onClick={()=>handleClick(t.id)}>{`${t.status?'↩️':'✅'}`} </button>
+                                <button className='bg-red-400 p-2 rounded-md hover:bg-red-500' onClick={()=>handleDelete(t.id)}> 🗑️</button>
+                            </div>
+                        </motion.div>
+                    </AnimatePresence>
                 )}
-            </div>
+            </motion.div>
 
             
             <div className='flex justify-center align-middle mr-6 mb-6 fixed w-16 h-16 rounded-full bg-blue-700 shadow-sm shadow-white text-white bottom-0 right-0 '>
