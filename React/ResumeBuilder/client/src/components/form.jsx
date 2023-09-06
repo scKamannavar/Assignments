@@ -101,9 +101,8 @@ const form = ({resumeinfo,addSkill, addEdu,addHobbies, addAbt, addExp, deleteSki
               <h1>Year</h1>
               <input className='h-12  p-2 border-b-2 border-blue-500 outline-none ' type='text' name="year" id="role" onChange={(e)=>setYear(e.target.value)}/>
               <h1>Description</h1>
-              <input className='h-12  p-2 border-b-2 border-blue-500 outline-none ' type='text' name="description" id="description" onChange={(e)=>setDescription(e.target.value)}/>
+              <textarea className='h-12  p-2 border-b-2 border-blue-500 outline-none ' type='text' name="description" id="description" onChange={(e)=>setDescription(e.target.value)}></textarea>
               <button className='bg-none text-xl font-Outfit hover:text-white border-2 border-blue-500 px-6 py-4 rounded-md hover:bg-blue-400 mt-3' type="button" onClick={(e)=>handleClickExperience(e)}>Add</button>
-            
             <div className='flex justify-end px-6'>
               <button className='bg-green-400 text-white px-6 py-4 rounded-md hover:bg-green-800 mt-3' type="button" onClick={()=>setDisplayform(displayform - 1)}>Previous</button>
               
