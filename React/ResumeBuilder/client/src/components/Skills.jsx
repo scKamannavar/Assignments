@@ -9,14 +9,14 @@ const Skills = ({skillData, deleteSkill}) => {
   }
   console.log('inside skill component',skillData)  // check
   return (
-    <div className={`${skillData.length ? '': 'hidden'} border-b-2 py-10 flex text-2xl`}>
+    <div className={`${skillData.length ? '': 'hidden'} border-b-2 py-10 flex text-md`}>
       {/* <div className={`flex-2 text-2xl w-[30%] pl-10`}>
         <h1>Skills</h1>
       </div> */}
-      <div className='flex-1 text-2xl'>
+      <div className='flex-1 '>
           {
             skillData.map((skill, index)=>
-            <div key={index} className='list-disc'>{skill} <span onClick={()=>handleDelete(index)}>Delete</span> </div>
+            <div key={index} className='list-disc p-4 bg-slate-300 rounded-lg mb-2'>{skill} <span onClick={()=>handleDelete(index)}>🚫</span> </div>
             )
           }
       </div>  

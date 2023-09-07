@@ -80,7 +80,8 @@ const design2 = ({resumeinfo}) => {
                             <h1 className='flex-1 font-semibold'>{exp.year}</h1>
                         </div>
                     </div>
-                    <p>{exp.description}</p>
+                    {/* <p>{exp.description}</p> */}
+                    <p className='ql-editor pl-0 [&>ul]:pl-0' dangerouslySetInnerHTML={{ __html: exp.description}} ></p>
                 </div>
                 )}
             </div>

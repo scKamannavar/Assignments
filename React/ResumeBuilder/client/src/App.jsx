@@ -128,7 +128,7 @@ const template = {
       setResumeinfo({...resumeinfo,hobbies :updatedArray})
     }
   return (
-    <>
+    <div className=''>
       <Form 
         addSkill = {addSkill}
         addEdu = {addEdu} 
@@ -167,10 +167,10 @@ const template = {
                 Design 1
           </div> */}
           <div className={`flex justify-center items-center w-48 h-48 bg-blue-100 rounded-md shadow-xl hover:bg-blue-400 mr-10 ${printDesign === 2 ? 'border border-blue-600 bg-blue-400':''} `} onClick={()=>setPrintdesign(2)}>
-              Design 2
+            Design 1
           </div>
           <div className={`flex justify-center items-center w-48 h-48 bg-blue-100 rounded-md shadow-xl hover:bg-blue-400 ${printDesign === 3 ? 'border border-blue-600 bg-blue-400':''} `} onClick={()=>setPrintdesign(3)}>
-              Design 3
+              Design 2
           </div>
         </div>
         <div className='flex justify-center p-4 print:hidden'>
@@ -179,7 +179,7 @@ const template = {
       </div>
      
 
-    </>
+    </div>
   )
 }
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 const design1 = ({resumeinfo}) => {
   return (
-    <div className='flex flex-col justify-start font-serif'>
+    <div className={`flex flex-col justify-start font-serif `}>
       <div className='flex-1 border-slate-600 border-b'>
         <h1 className='text-4xl'>{resumeinfo.about.name}</h1>
       </div>
@@ -26,7 +26,8 @@ const design1 = ({resumeinfo}) => {
                                 <h1 className='flex-1 font-semibold'>{exp.company} </h1>
                                 <h1 className='flex-1 font-semibold'>{exp.year}</h1>
                             </div>
-                                <p>{exp.description}</p>
+                                {/* <p >{exp.description}</p> */}
+                                <p className='ql-editor pl-0 [&>ul]:pl-0' dangerouslySetInnerHTML={{ __html: exp.description}} ></p>
                         </div>
             }
             )}
