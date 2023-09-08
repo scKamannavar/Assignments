@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import ResumeData from '../data/info'
 
-const Hobbies = ({hobbiesData,deleteHobby}) => {
+const Hobbies = ({hobbiesData,deleteHobby, dispatch}) => {
   
  const handleDelete =(id)=>{
-    deleteHobby(id)
+  dispatch({type:'DELETE_HOBBY', payload:id})
+    // deleteHobby(id)
  } 
 
 //   console.log('inside hobbies component',hobbiesData) //  check

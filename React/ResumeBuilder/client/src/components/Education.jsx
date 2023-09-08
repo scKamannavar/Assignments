@@ -1,11 +1,12 @@
 import React from 'react'
 import ResumeData from '../data/info'
 
-const Education = ({list, eduData, deleteEdu}) => {
+const Education = ({list, eduData, deleteEdu, dispatch}) => {
   console.log(list)
 
 const handleDelete = (id)=>{
-  deleteEdu(id)
+  // deleteEdu(id)
+  dispatch({type:'DELETE_EDUCATION', payload:id})
 }
 
   return (

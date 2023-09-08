@@ -2,10 +2,11 @@ import React from 'react'
 import ResumeData from '../data/info'
 
 
-const Experience = ({expData, deleteExp}) => {
+const Experience = ({expData, deleteExp, dispatch}) => {
 console.log('experience descri[ption',expData)
   const handleDelete = (id)=>{
-    deleteExp(id)
+    // deleteExp(id)
+    dispatch({type: 'DELETE_EXPERIENCE', payload:id})
   }
 
 

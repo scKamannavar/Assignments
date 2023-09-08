@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useReducer  } from 'react'
 import './App.css'
 import Resume from './components/Resume'
 import Form from './components/form'
@@ -9,8 +9,6 @@ import Design2 from './components/design2'
 
 
 function App() {
-//  console.log('Data from app', ResumeData)
-// const [resumeinfo, setResumeinfo] = useState(ResumeData)  
 
 const template = {
   experience : [],
@@ -25,128 +23,67 @@ const template = {
   hobbies : [],
   }
   var storedResumeData = localStorage.getItem('resumeData');
-  console.log('storedResumeData',storedResumeData)
+  
    if (storedResumeData == null) {
-     // const initialResumeData = template;
+     
      localStorage.setItem('resumeData', JSON.stringify(template));
      console.log('template', template)
    }
-   const [resumeinfo, setResumeinfo] = useState(JSON.parse(storedResumeData))
+
+  //  const [resumeinfo, setResumeinfo] = useState(JSON.parse(storedResumeData))
+
+  const resumeReducer = (state, action) => {
+    switch (action.type) {
+      // add
+      case 'ADD_SKILL':
+      return { ...state, skills: [...state.skills, action.payload] };
+      case 'ADD_EDUCATION':
+        return { ...state, education: [...state.education, action.payload] };
+      case 'ADD_EXPERIENCE':
+        return {...state,experience:[...state.experience,action.payload]};
+      case 'ADD_ABOUT':
+        return {...state,about:action.payload}
+      case 'ADD_HOBBBIES':
+        return {...state,hobbies:[...state.hobbies,action.payload]}
+      // delete
+      case 'DELETE_SKILL':
+        const updatedSKills = [...state.skills];
+        updatedSKills.splice(action.payload, 1)
+        return { ...state, skills: updatedSKills };
+      case 'DELETE_EXPERIENCE':
+        const updatedExperience = state.experience.filter((exp) => exp.id !== action.payload);
+        return { ...state, experience: updatedExperience };
+      case 'DELETE_EDUCATION':
+        const updatedEducation = state.education.filter((exp) => exp.id !== action.payload);
+        return {...state,education:updatedEducation};
+      case 'DELETE_HOBBY':
+        const updatedHobbbies= [...state.hobbies];
+        updatedHobbbies.splice(action.payload, 1)
+          return {...state,hobbies :updatedHobbbies};
+         
+      default:
+        return state;
+    }
+  };
+
+   const [resumeinfo, dispatch] = useReducer(resumeReducer, JSON.parse(storedResumeData));
  
 
-  // useEffect(() => {
-  //   if (typeof localStorage !== 'undefined') {
-  //      storedResumeData = localStorage.getItem('resumeData');
-  //     if (!storedResumeData) {
-  //       // const initialResumeData = template;
-  //       localStorage.setItem('resumeData', JSON.stringify(template));
-  //       console.log('template', template)
-  //     }
-  
-  //   }
-  // }, []);
  
-  // const [resumeinfo, setResumeinfo] = useState(template)
-  // const [skills, setSkills] = useState(ResumeData.skills)
-  // const [education, setEducation] = useState(ResumeData.education)
-  // const [experience, setExperience] = useState(ResumeData.experience)
-  // const [about, setAbout] = useState(ResumeData.about)
-  // const [hobbies, setHobbies] = useState(ResumeData.hobbies)
 
   const[printDesign, setPrintdesign] = useState(0)
  
-  // useEffect(() => {
-  //   const items = JSON.parse(localStorage.getItem('resumeData'));
-  //   // alert(items)
-  //   if (items) {
-  //     setResumeinfo(items);
-  //   }
-  // },[]  );
 
-  useEffect(() => {
+ useEffect(() => {
         localStorage.setItem('resumeData', JSON.stringify(resumeinfo));
   },[resumeinfo]);
-  // var items
-  // useEffect(() => {
-  //     const items = JSON.parse(localStorage.getItem('resumeData'));
-  //     setResumeinfo(items); 
-  // }, []);
 
 
-  // localStorage.setItem('resumeData', JSON.stringify(resumeinfo));
-      
 
-  
-    //add-------------------------------------------------------------------------------------------------
-  function addSkill(additionalData){
-    // setResumeinfo([...resumeinfo.skills, additionalData])
-    setResumeinfo({...resumeinfo,skills:[...resumeinfo.skills,additionalData]})
-        // localStorage.setItem('items', JSON.stringify({ResumeData}));  
-    }
-
-    function addEdu(additionalData){
-      // setEducation([...resumeinfo.education, additionalData])
-      setResumeinfo({...resumeinfo,education:[...resumeinfo.education,additionalData]})
-    }
-
-    function addExp(additionalData){
-      // setExperience([...resumeinfo.experience, additionalData])
-      setResumeinfo({...resumeinfo,experience:[...resumeinfo.experience,additionalData]})
-    }
-
-    function addAbt(additionalData){
-      // setAbout(additionalData)
-      setResumeinfo({...resumeinfo,about:additionalData})
-    }
-
-    function addHobbies(additionalData){
-      // console.log('New hobby in app component', additionalData)
-      setResumeinfo({...resumeinfo,hobbies:[...resumeinfo.hobbies,additionalData]})
-    }
-    //delete--------------------------------------------------------------------------------------------
-    function deleteSkill(skillId){
-      // setSkills(skills.filter((skill)=> skill !== skillId))
-      const orignalArray = resumeinfo.skills
-      const updatedArray = [...orignalArray];
-      updatedArray.splice(skillId, 1)
-      setResumeinfo({...resumeinfo,skills :updatedArray})
-    } 
-
-    function deleteExp(id){
-      // setSkills(skills.filter((skill)=> skill !== skillId))
-      setResumeinfo({...resumeinfo,experience:resumeinfo.experience.filter((exp)=> exp.id !== id)})
-    }
-
-    function deleteEdu(id){
-      setResumeinfo({...resumeinfo,education:resumeinfo.education.filter((edu)=> edu.id !== id)})
-    }
-
-    function deleteHobby(id){
-      const orignalArray = resumeinfo.hobbies
-      const updatedArray = [...orignalArray];
-      updatedArray.splice(id, 1)
-      setResumeinfo({...resumeinfo,hobbies :updatedArray})
-    }
   return (
     <div className=''>
-      <Form 
-        addSkill = {addSkill}
-        addEdu = {addEdu} 
-        addExp = {addExp} 
-        addAbt = {addAbt} 
-        addHobbies={addHobbies} 
-        // skillData={skills} 
-        // eduData={education} 
-        // expData = {experience}
-        // abtData={about}
-        // hobbiesData={hobbies} 
-        resumeinfo = {resumeinfo}
-        deleteSkill={deleteSkill}
-        deleteExp = {deleteExp}
-        deleteEdu = {deleteEdu}
-        deleteHobby = {deleteHobby}
-         
-         />
+
+      <Form  dispatch = {dispatch} resumeinfo = {resumeinfo}/>
 
       <div className={`hidden ${printDesign === 1? 'print:block ':'print:hidden '} `}>
         {/* <Resume skillData={skills} eduData={education} expData = {experience} abtData={about} hobbiesData={hobbies} deleteSkill={deleteSkill}></Resume> */}

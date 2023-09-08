@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 
 
-const Skills = ({skillData, deleteSkill}) => {
+const Skills = ({skillData, deleteSkill, dispatch}) => {
   console.log('Aganaga aganaga skill', skillData)
   function handleDelete(id){
-    deleteSkill(id)
+    dispatch({type:'DELETE_SKILL', payload:id})
+    // deleteSkill(id)
     // console.log(id)
   }
   console.log('inside skill component',skillData)  // check

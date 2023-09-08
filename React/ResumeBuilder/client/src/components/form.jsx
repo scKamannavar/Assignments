@@ -9,7 +9,7 @@ import { AnimatePresence, motion, spring } from "framer-motion"
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-const form = ({resumeinfo,addSkill, addEdu,addHobbies, addAbt, addExp, deleteSkill, deleteExp, deleteEdu, deleteHobby }) => {
+const form = ({resumeinfo,addSkill, addEdu,addHobbies, addAbt, addExp, deleteSkill, deleteExp, deleteEdu, deleteHobby, dispatch }) => {
 
   // console.log('all data in form.jsx', resumeinfo,addSkill, addEdu,addHobbies, addAbt)
     const [skill, setSkill] = useState('');
@@ -32,8 +32,9 @@ const form = ({resumeinfo,addSkill, addEdu,addHobbies, addAbt, addExp, deleteSki
     const [displayform, setDisplayform] = useState(1)
 
     function handleClickSkil(){
-        addSkill(skill)  
-        setSkill('')
+        // addSkill(skill)  
+        // setSkill('')
+        dispatch({ type: 'ADD_SKILL', payload: skill });
     }
 
     function handleClickExperience(){
@@ -44,7 +45,8 @@ const form = ({resumeinfo,addSkill, addEdu,addHobbies, addAbt, addExp, deleteSki
                 'year' : year,
                 'description' : description,
             }
-            addExp(newExp)
+            // addExp(newExp)
+            dispatch({type:'ADD_EXPERIENCE', payload:newExp})
     }
 
     function handleClickEducation(){
@@ -55,19 +57,23 @@ const form = ({resumeinfo,addSkill, addEdu,addHobbies, addAbt, addExp, deleteSki
             'year' : eduyear,
             'grades': grades,
         }
-        addEdu(newEdu) 
+        // addEdu(newEdu) 
+        dispatch({type : 'ADD_EDUCATION',payload : newEdu})
     } 
     function handleClickHobby(){
-      addHobbies(hobbies)
+      // addHobbies(hobbies)
+      dispatch({type:'ADD_HOBBBIES', payload:hobbies})
     }
 
     function handleClickAbout(){
-      addAbt({
+      const newAbt = {
         aboutText : aboutTxt,
         phone: phone,
         email:email,
         name : name,
-      }) 
+      }
+      // addAbt(newAbt) 
+      dispatch({type:'ADD_ABOUT', payload : newAbt})
   } 
 
   return (
@@ -109,7 +115,7 @@ const form = ({resumeinfo,addSkill, addEdu,addHobbies, addAbt, addExp, deleteSki
               
               <button className='bg-green-400 text-white px-6 py-4 ml-4 rounded-md hover:bg-green-800 mt-3' type="button" onClick={()=>setDisplayform(displayform + 1)}>Next</button>
             </div>
-              <Experience expData = {resumeinfo.experience} deleteExp={deleteExp}/>
+              <Experience expData = {resumeinfo.experience} dispatch={dispatch} deleteExp={deleteExp}/>
           </div>
           
 {/* Education */}
@@ -129,7 +135,7 @@ const form = ({resumeinfo,addSkill, addEdu,addHobbies, addAbt, addExp, deleteSki
                 
                 <button className='bg-green-400 text-white px-6 py-4 ml-4 rounded-md hover:bg-green-800 mt-3' type="button" onClick={()=>setDisplayform(displayform + 1)}>Next</button>
               </div>
-              <Education list="list-decimal" eduData={resumeinfo.education} deleteEdu={deleteEdu}/>
+              <Education list="list-decimal" eduData={resumeinfo.education} dispatch={dispatch} deleteEdu={deleteEdu}/>
           </div>
           
 {/* About */}
@@ -175,7 +181,7 @@ const form = ({resumeinfo,addSkill, addEdu,addHobbies, addAbt, addExp, deleteSki
               
                 <button className='bg-green-400 text-white px-6 py-4 ml-4 rounded-md hover:bg-green-800 mt-3' type="button" onClick={()=>setDisplayform(5)}>Next</button>
             </div>
-              <Hobbies hobbiesData={resumeinfo.hobbies} deleteHobby={deleteHobby}/>
+              <Hobbies hobbiesData={resumeinfo.hobbies} dispatch={dispatch} deleteHobby={deleteHobby}/>
           </div>
 {/* Skills */}
             <div className={`flex flex-col ${displayform===4?'block':'hidden'}`}>
@@ -189,7 +195,7 @@ const form = ({resumeinfo,addSkill, addEdu,addHobbies, addAbt, addExp, deleteSki
                   <button className='bg-green-400 text-white px-6 py-4 ml-4 rounded-md hover:bg-green-800 mt-3' type="button" onClick={()=>setDisplayform(displayform + 1)}>Next</button>
                   
               </div>
-              <Skills skillData = {resumeinfo.skills} deleteSkill= {deleteSkill} />
+              <Skills skillData = {resumeinfo.skills} dispatch={dispatch} deleteSkill= {deleteSkill} />
           </div>
         </div>
         
