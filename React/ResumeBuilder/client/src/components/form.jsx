@@ -26,7 +26,7 @@ const form = ({resumeinfo,addSkill, addEdu,addHobbies, addAbt, addExp, deleteSki
     const [aboutTxt, setAboutTxt] = useState(resumeinfo.about.aboutText);
     const [phone, setPhone] = useState(resumeinfo.about.phone);
     const [email, setEmail] = useState(resumeinfo.about.email);
-    const [name, setName] = useState(resumeinfo.about.email);
+    const [name, setName] = useState(resumeinfo.about.name);
     const [hobbies, setHobbies] = useState('');
 
     const [displayform, setDisplayform] = useState(1)
