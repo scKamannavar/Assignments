@@ -11,20 +11,20 @@ const Experience = ({expData, deleteExp, dispatch}) => {
 
 
   return (
-    <div className={`${ResumeData.experience.length ? '': 'hidden'} border-b-2 flex text-md`}>
+    <div className={`${ResumeData.experience.length ? '': 'hidden'} font-Poppins border-b-2 flex text-md divide-y`}>
     {/* <div className='flex-2 text-2xl w-[30%] pl-10'>
         <h1>Experience:</h1>
     </div> */}
     <div className='flex-1 '>   
         {expData.map((exp, index)=>
-        <div className='p-4 bg-slate-300 ' key={index}>
+        <div className='p-4' key={index}>
             
           <h1 className='' >{exp.company}</h1>
             
           <h1 className='' >{exp.year}</h1>
            
           <h1 className=''>{exp.role}</h1>
-          <p className='ql-editor pl-0 [&>ul]:pl-0' dangerouslySetInnerHTML={{ __html: exp.description}} ></p>
+          <p className='ql-editor pl-0 [&_ul]:text-sm [&>ul]:pl-0' dangerouslySetInnerHTML={{ __html: exp.description}} ></p>
           <span className='text-sm hover:cursor-pointer' onClick={()=>handleDelete(exp.id)}>🚫</span>
         </div>
         )}

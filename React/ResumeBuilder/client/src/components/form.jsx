@@ -73,20 +73,27 @@ const form = ({resumeinfo,deleteSkill, deleteExp, deleteEdu, deleteHobby, dispat
                 <h1>BUILD YOUR RESUME</h1>
               </div>
       <form className='flex flex-col items-center pt-0 rounded-md p-4 h-[90%]  w-full sm:w-[70%] md:w-[70%] lg:w-[70%]' action="">
-        <div className='w-full p-6 bg-white rounded-xl shadow-xl'> 
+        <div className='w-full p-6 bg-white rounded-xl shadow-xl '> 
 
 
           <FormHeader displayform={displayform}/>
 {/* Experience */}
-          <div  className={`flex flex-col lg:flex-row gap-6 ${displayform===2?'block':'hidden'}`}>
-            <div className='flex flex-1 flex-col w-full lg:w-[400px]'>
+          <div  className={`flex flex-col lg:flex-row gap-6 ${displayform===2?'block':'hidden'} pt-2`}>
+            <div className='flex flex-1 flex-col w-full lg:w-[400px] '>
               {/* <h1 className='text-4xl font-bold text-slate-900 self-center font-Poppins'>Experience</h1> */}
                 <h1>Company</h1>
                 <input className='h-[8%]  p-2 border-b-2 border-blue-500 outline-none ' type="text" name="company" id="company" onChange={(e)=>setCompany(e.target.value)} />
-                <h1>Role</h1>
-                <input className='h-[8%]  p-2 border-b-2 border-blue-500 outline-none ' type="text" name="role" id="year" onChange={(e)=>setRole(e.target.value)}/>
-                <h1>Year</h1>
-                <input className='h-[8%]  p-2 border-b-2 border-blue-500 outline-none ' type='text' name="year" id="role" onChange={(e)=>setYear(e.target.value)}/>
+                <div className='flex justify-between'>
+                  <div>
+                    <h1>Role</h1>
+                    <input className='h-[8%]  p-2 border-b-2 border-blue-500 outline-none ' type="text" name="role" id="year" onChange={(e)=>setRole(e.target.value)}/>
+                  </div>
+                  <div>
+                    <h1>Year</h1>
+                    <input className='h-[8%]  p-2 border-b-2 border-blue-500 outline-none ' type='text' name="year" id="role" onChange={(e)=>setYear(e.target.value)}/>
+                  </div>
+                </div>
+               
                 <h1>Description</h1>
                 {/* <textarea className='h-12  p-2 border-b-2 border-blue-500 outline-none ' type='text' name="description" id="description" onChange={(e)=>setDescription(e.target.value)}></textarea> */}
                 <ReactQuill
@@ -108,14 +115,14 @@ const form = ({resumeinfo,deleteSkill, deleteExp, deleteEdu, deleteHobby, dispat
                 <button className='bg-green-400 text-white px-6 py-4 ml-4 rounded-md hover:bg-green-800 mt-3' type="button" onClick={()=>setDisplayform(displayform + 1)}>Next</button>
               </div>
             </div>
-            <div className='flex-1 lg:overflow-y-scroll lg:h-[450px]'>
+            <div className='flex-1 lg:overflow-y-scroll lg:h-[430px] shadow-[inset_0px_0px_10px_grey]'>
               <Experience expData = {resumeinfo.experience} dispatch={dispatch} deleteExp={deleteExp}/>
             </div>
              
           </div>
           
 {/* Education */}
-          <div className={`flex flex-col lg:flex-row gap-6 ${displayform===3?'block':'hidden'}`}>
+          <div className={`flex flex-col lg:flex-row gap-6 ${displayform===3?'block':'hidden'} pt-2`}>
             <div className='flex flex-1 flex-col w-full lg:w-[400px]'>
               {/* <h1 className='text-4xl font-bold text-slate-900 self-center font-Poppins'>Education</h1> */}
                 <h1>Institution</h1>
@@ -133,7 +140,7 @@ const form = ({resumeinfo,deleteSkill, deleteExp, deleteEdu, deleteHobby, dispat
                   <button className='bg-green-400 text-white px-6 py-4 ml-4 rounded-md hover:bg-green-800 mt-3' type="button" onClick={()=>setDisplayform(displayform + 1)}>Next</button>
                 </div>
             </div>
-            <div className='flex-1 lg:overflow-y-scroll lg:h-[450px]'>
+            <div className='flex-1 lg:overflow-y-scroll lg:h-[430px] shadow-[inset_0px_0px_10px_grey]'>
               <Education list="list-decimal" eduData={resumeinfo.education} dispatch={dispatch} deleteEdu={deleteEdu}/>
             </div> 
             
@@ -161,7 +168,7 @@ const form = ({resumeinfo,deleteSkill, deleteExp, deleteEdu, deleteHobby, dispat
           {/* </AnimatePresence> */}
           
 {/*Hobbies */}
-          <div className={`flex flex-col lg:flex-row gap-6 ${displayform===5?'block':'hidden'}`} >
+          <div className={`flex flex-col lg:flex-row gap-6 ${displayform===5?'block':'hidden'} pt-2`} >
             <div className='flex flex-1 flex-col w-full lg:w-[400px]'>
               {/* <h1 className='text-4xl text-slate-900 self-center font-bold font-Poppins'>Hobbies/Intersest</h1> */}
                 <input className='h-12  p-2 border-b-2 border-blue-500 outline-none ' type="text" name="Hobbies" id="Hobbies"onChange={(e)=>setHobbies(e.target.value)} />
@@ -172,13 +179,13 @@ const form = ({resumeinfo,deleteSkill, deleteExp, deleteEdu, deleteHobby, dispat
                   <button className='bg-green-400 text-white px-6 py-4 ml-4 rounded-md hover:bg-green-800 mt-3' type="button" onClick={()=>setDisplayform(displayform + 1)}>Next</button>
               </div>
             </div>
-            <div className='flex-1 lg:overflow-y-scroll lg:h-[450px]'>
+            <div className='flex-1 lg:overflow-y-scroll lg:h-[430px] shadow-[inset_0px_0px_10px_grey]'>
               <Hobbies hobbiesData={resumeinfo.hobbies} dispatch={dispatch} deleteHobby={deleteHobby}/>
             </div>
              
           </div>
 {/* Skills */}
-            <div className={`flex flex-col lg:flex-row gap-6 ${displayform===4?'block':'hidden'}`}>
+            <div className={`flex flex-col lg:flex-row gap-6 ${displayform===4?'block':'hidden'} pt-2`}>
             <div className='flex flex-1 flex-col w-full lg:w-[400px]'>
               {/* <h1 className='text-4xl font-bold text-slate-900 self-center font-Poppins'>Skills</h1> */}
               <input className='h-12  p-2 border-b-2 border-blue-500 outline-none ' placeholder='Type your skill here (Eg: "Javascript")' type="text" name="skills" id="skills" value={skill} onChange={(e)=>setSkill(e.target.value)} />
@@ -189,7 +196,7 @@ const form = ({resumeinfo,deleteSkill, deleteExp, deleteEdu, deleteHobby, dispat
                   
               </div>
             </div>
-            <div className='flex-1 lg:overflow-y-scroll lg:h-[450px]'>
+            <div className='flex-1 lg:overflow-y-scroll lg:h-[430px] shadow-[inset_0px_0px_10px_grey]'>
               <Skills skillData = {resumeinfo.skills} dispatch={dispatch} deleteSkill= {deleteSkill} />
             </div>  
           </div>
