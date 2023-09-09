@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 
 
 const Skills = ({skillData, deleteSkill, dispatch}) => {
-  console.log('Aganaga aganaga skill', skillData)
+  // console.log('Aganaga aganaga skill', skillData)
   function handleDelete(id){
     dispatch({type:'DELETE_SKILL', payload:id})
     // deleteSkill(id)
     // console.log(id)
   }
-  console.log('inside skill component',skillData)  // check
+  // console.log('inside skill component',skillData)  // check
   return (
     <div className={`${skillData.length ? '': 'hidden'} border-b-2 py-10 flex text-md`}>
       {/* <div className={`flex-2 text-2xl w-[30%] pl-10`}>

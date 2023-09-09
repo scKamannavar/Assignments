@@ -3,7 +3,7 @@ import ResumeData from '../data/info'
 
 
 const Experience = ({expData, deleteExp, dispatch}) => {
-console.log('experience descri[ption',expData)
+// console.log('experience descri[ption',expData)
   const handleDelete = (id)=>{
     // deleteExp(id)
     dispatch({type: 'DELETE_EXPERIENCE', payload:id})
@@ -11,13 +11,13 @@ console.log('experience descri[ption',expData)
 
 
   return (
-    <div className={`${ResumeData.experience.length ? '': 'hidden'}bg-gray- border-b-2 py-10 flex text-md`}>
+    <div className={`${ResumeData.experience.length ? '': 'hidden'} border-b-2 flex text-md`}>
     {/* <div className='flex-2 text-2xl w-[30%] pl-10'>
         <h1>Experience:</h1>
     </div> */}
     <div className='flex-1 '>   
         {expData.map((exp, index)=>
-        <div className="p-4 bg-slate-300 rounded-lg mb-4" key={index}>
+        <div className='p-4 bg-slate-300 ' key={index}>
             
           <h1 className='' >{exp.company}</h1>
             

@@ -78,12 +78,14 @@ const template = {
         localStorage.setItem('resumeData', JSON.stringify(resumeinfo));
   },[resumeinfo]);
 
-
+  function updatePrintDesign(value){
+    setPrintdesign(value)
+  }
 
   return (
     <div className=''>
 
-      <Form  dispatch = {dispatch} resumeinfo = {resumeinfo}/>
+      <Form  dispatch = {dispatch} resumeinfo = {resumeinfo} printDesign={printDesign} updatePrintDesign={updatePrintDesign}/>
 
       <div className={`hidden ${printDesign === 1? 'print:block ':'print:hidden '} `}>
         {/* <Resume skillData={skills} eduData={education} expData = {experience} abtData={about} hobbiesData={hobbies} deleteSkill={deleteSkill}></Resume> */}
@@ -112,7 +114,7 @@ const template = {
         </div>
         <div className='flex justify-center p-4 print:hidden'>
           <input type="button" value="Print" onClick={()=>{window.print()}} className='bg-none border-2 border-blue-700 text-2xl px-4 py-2 text-black hover:text-white hover:bg-blue-700 rounded-xl'  />
-      </div>
+        </div>
       </div>
      
 
